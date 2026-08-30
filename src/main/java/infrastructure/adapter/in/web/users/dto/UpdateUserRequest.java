@@ -11,5 +11,8 @@ public record UpdateUserRequest(
         String email,
 
         @Schema(description = "Account password", example = "SecurePassword123!")
-        String password
+        String password,
+        @Schema(description = "User Status", example = "True")
+        Boolean isActive
+
 ) {}

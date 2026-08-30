@@ -23,6 +23,7 @@ public class CreateUserService implements CreateUserUseCase {
             throw new IllegalArgumentException("Email duplicated");
         }
 
+        User.validatePasswordStrength(password);
         String hashedPassword = passwordHasher.hash(password);
         User newUser = User.create(name, email, hashedPassword);
 

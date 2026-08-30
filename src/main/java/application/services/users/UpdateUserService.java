@@ -29,8 +29,9 @@ public class UpdateUserService implements UpdateUserUseCase {
             user.updateEmail(email);
         }
         if (password != null) {
+            User.validatePasswordStrength(password);
             String hashedPassword = passwordHasher.hash(password);
-            user.updatePassword(hashedPassword);
+            user.setPassword(hashedPassword);
         }
         if (isActive != null) {
             if (isActive) {
