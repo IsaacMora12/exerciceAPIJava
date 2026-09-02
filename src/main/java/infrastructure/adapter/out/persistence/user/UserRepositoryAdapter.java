@@ -1,6 +1,6 @@
 package infrastructure.adapter.out.persistence.user;
 
-import domain.model.User;
+import domain.model.user.User;
 import domain.port.users.UserRepository;
 import org.springframework.stereotype.Component;
 

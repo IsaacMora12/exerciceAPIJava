@@ -2,7 +2,7 @@ package application.services.users;
 
 import domain.port.PasswordHasher;
 import domain.port.users.UserRepository;
-import domain.model.User;
+import domain.model.user.User;
 import domain.port.users.in.CreateUserUseCase;
 import org.springframework.stereotype.Service;
 

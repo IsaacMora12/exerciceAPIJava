@@ -1,7 +1,7 @@
 package com.example.exerciceapi.application.services.users;
 
 import application.services.users.CreateUserService;
-import domain.model.User;
+import domain.model.user.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

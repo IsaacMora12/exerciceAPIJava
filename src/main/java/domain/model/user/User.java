@@ -1,4 +1,4 @@
-package domain.model;
+package domain.model.user;
 
 import java.time.LocalDateTime;
 import java.util.regex.Pattern;

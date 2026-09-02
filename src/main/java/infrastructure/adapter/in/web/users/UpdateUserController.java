@@ -1,6 +1,6 @@
 package infrastructure.adapter.in.web.users;
 
-import domain.model.User;
+import domain.model.user.User;
 import domain.port.users.in.UpdateUserUseCase;
 import infrastructure.adapter.in.web.users.dto.UpdateUserRequest;
 import infrastructure.adapter.in.web.users.dto.ErrorResponse;

@@ -1,6 +1,6 @@
 package application.services.users;
 
-import domain.model.User;
+import domain.model.user.User;
 import domain.port.PasswordHasher;
 import domain.port.users.UserRepository;
 import domain.port.users.in.UpdateUserUseCase;

@@ -4,7 +4,7 @@ import domain.port.users.in.CreateUserUseCase;
 import infrastructure.adapter.in.web.users.dto.CreateUserRequest;
 import infrastructure.adapter.in.web.users.dto.ErrorResponse;
 import infrastructure.adapter.in.web.users.dto.UserResponse;
-import domain.model.User;
+import domain.model.user.User;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;

@@ -1,6 +1,6 @@
 package domain.port.users;
 
-import domain.model.User;
+import domain.model.user.User;
 
 import java.util.List;
 import java.util.Optional;
