@@ -41,12 +41,13 @@ public class UpdateUserController {
     })
     @PutMapping("/{id}")
     public ResponseEntity<?> updateUser(@PathVariable Long id, @org.springframework.web.bind.annotation.RequestBody UpdateUserRequest request) {
-        User updateUser = updateUserUseCase.updateUser(id, request.name(), request.email(), request.password(), request.isActive());
+        User updateUser = updateUserUseCase.updateUser(id, request.name(), request.email(), request.password(), request.isActive(), request.rol());
 
         UserResponse response = new UserResponse(
                 updateUser.getId(),
                 updateUser.getName(),
                 updateUser.getEmail(),
+                updateUser.getRol(),
                 updateUser.getIsActive()
         );
 

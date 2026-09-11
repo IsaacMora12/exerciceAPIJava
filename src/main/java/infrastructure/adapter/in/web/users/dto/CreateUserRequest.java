@@ -1,5 +1,6 @@
 package infrastructure.adapter.in.web.users.dto;
 
+import infrastructure.adapter.out.persistence.user.UserEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "Payload required to create a new user")
@@ -11,5 +12,8 @@ public record CreateUserRequest(
         String email,
 
         @Schema(description = "Account password", example = "SecurePassword123!")
-        String password
+        String password,
+
+        @Schema(description = "User role: USER or ADMIN", example = "USER", allowableValues = {"USER", "ADMIN"})
+        UserEntity.Rol rol
 ) {}

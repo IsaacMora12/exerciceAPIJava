@@ -9,7 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -36,7 +36,7 @@ public class CreateUserController {
             summary = "Create User",
             description = "Create a new user in the application"
     )
-    @RequestBody(
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
             description = "Payload required to create a new user",
             required = true,
             content = @Content(
@@ -63,12 +63,13 @@ public class CreateUserController {
     @PostMapping
     public ResponseEntity<?> createUser(@RequestBody CreateUserRequest request) {
         try {
-            User createdUser = createUserUseCase.createUser(request.name(), request.email(), request.password());
+            User createdUser = createUserUseCase.createUser(request.name(), request.email(), request.password(), request.rol());
 
             UserResponse response = new UserResponse(
                     createdUser.getId(),
                     createdUser.getName(),
                     createdUser.getEmail(),
+                    createdUser.getRol(),
                     createdUser.getIsActive()
             );
 

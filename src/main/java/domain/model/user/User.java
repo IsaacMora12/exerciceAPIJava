@@ -1,5 +1,7 @@
 package domain.model.user;
 
+import infrastructure.adapter.out.persistence.user.UserEntity;
+
 import java.time.LocalDateTime;
 import java.util.regex.Pattern;
 
@@ -12,36 +14,48 @@ public class User {
     private String name;
     private String email;
     private String password;
+    private UserEntity.Rol rol;
     private Boolean isActive;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     // Constructor privado — TODOS los constructores pasan por acá
+    // NO valida password strength acá: el service valida el raw password ANTES de hashear,
+    // y el constructor recibe el hashed password que ya no debe validarse por longitud.
     private User(Long id, String name, String email, String password,
-                 Boolean isActive, LocalDateTime createdAt, LocalDateTime updatedAt) {
+                 UserEntity.Rol rol, Boolean isActive,
+                 LocalDateTime createdAt, LocalDateTime updatedAt) {
         validateName(name);
         validateEmail(email);
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
+        this.rol = rol;
         this.isActive = isActive;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
 
-    // Fábrica 1: Crear usuario nuevo
+    // Fábrica 1: Crear usuario nuevo (rol por defecto: USER)
     public static User create(String name, String email, String password) {
-        return new User(null, name, email, password, true, LocalDateTime.now(), LocalDateTime.now());
+        return new User(null, name, email, password, UserEntity.Rol.USER,
+                true, LocalDateTime.now(), LocalDateTime.now());
+    }
+
+    // Fábrica 1b: Crear usuario nuevo con rol específico
+    public static User create(String name, String email, String password, UserEntity.Rol rol) {
+        return new User(null, name, email, password, rol, true, LocalDateTime.now(), LocalDateTime.now());
     }
 
     // Fábrica 2: Reconstruir usuario desde la BD
     public static User reconstruct(Long id, String name, String email, String password,
-                                   Boolean isActive, LocalDateTime createdAt, LocalDateTime updatedAt) {
+                                   UserEntity.Rol rol, Boolean isActive,
+                                   LocalDateTime createdAt, LocalDateTime updatedAt) {
         if (id == null) {
             throw new IllegalArgumentException("The id must not be empty for an existing user");
         }
-        return new User(id, name, email, password, isActive, createdAt, updatedAt);
+        return new User(id, name, email, password, rol, isActive, createdAt, updatedAt);
     }
 
     // Métodos de negocio
@@ -100,11 +114,17 @@ public class User {
         }
     }
 
+    public void updateRol(UserEntity.Rol rol) {
+        this.rol = rol;
+        updateTimestamp();
+    }
+
     // Getters
     public Long getId() { return id; }
     public String getName() { return name; }
     public String getEmail() { return email; }
     public String getPassword() { return password; }
+    public UserEntity.Rol getRol() { return rol; }
     public Boolean getIsActive() { return isActive; }
     public LocalDateTime getCreatedAt() { return createdAt; }
     public LocalDateTime getUpdatedAt() { return updatedAt; }

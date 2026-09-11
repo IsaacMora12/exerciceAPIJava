@@ -41,6 +41,7 @@ public class ViewUser {
                         user.getId(),
                         user.getName(),
                         user.getEmail(),
+                        user.getRol(),
                         user.getIsActive()
                 ))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
