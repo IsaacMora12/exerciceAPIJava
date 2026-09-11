@@ -42,7 +42,7 @@ public class AcceptInvitationController {
 
             MembershipResponse response = new MembershipResponse(
                     membership.getId(), membership.getUserId(), membership.getTeamId(),
-                    membership.getRoleId(), membership.getIsActive(),
+                    membership.getRole(), membership.getIsActive(),
                     membership.getJoinedAt(), membership.getUpdatedAt()
             );
 

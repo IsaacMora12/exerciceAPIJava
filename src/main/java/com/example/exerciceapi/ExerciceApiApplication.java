@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.example.exerciceapi", "application", "domain", "infrastructure"})
+@ComponentScan(basePackages = {"com.example.exerciceapi", "application", "domain", "infrastructure", "exercise"})
 @EnableJpaRepositories(basePackages = {"infrastructure.adapter.out.persistence"})
 @EntityScan(basePackages = {"infrastructure.adapter.out.persistence"})
 public class ExerciceApiApplication {

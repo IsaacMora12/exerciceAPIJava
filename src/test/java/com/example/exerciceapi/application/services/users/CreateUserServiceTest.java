@@ -26,7 +26,7 @@ class CreateUserServiceTest {
         String password = "test12353";
 
         // Act
-        User user = createUserService.createUser(name, email, password);
+        User user = createUserService.createUser(name, email, password, null);
 
         // Assert
         assertNotNull(user.getId());
@@ -44,11 +44,11 @@ class CreateUserServiceTest {
         String password = "test12353";
 
         // Act - First creation should work
-        createUserService.createUser(name, email, password);
+        createUserService.createUser(name, email, password, null);
 
         // Act & Assert - Second creation with same email should fail
         assertThrows(IllegalArgumentException.class, () -> {
-            createUserService.createUser(name, email, password);
+            createUserService.createUser(name, email, password, null);
         });
     }
 
@@ -61,7 +61,7 @@ class CreateUserServiceTest {
 
         // Act & Assert
         assertThrows(IllegalArgumentException.class, () -> {
-            createUserService.createUser(name, email, password);
+            createUserService.createUser(name, email, password, null);
         });
     }
 
@@ -74,7 +74,7 @@ class CreateUserServiceTest {
 
         // Act & Assert
         assertThrows(Exception.class, () -> {
-            createUserService.createUser(name, email, password);
+            createUserService.createUser(name, email, password, null);
         });
     }
 
@@ -87,7 +87,7 @@ class CreateUserServiceTest {
 
         // Act & Assert
         assertThrows(IllegalArgumentException.class, () -> {
-            createUserService.createUser(name, email, password);
+            createUserService.createUser(name, email, password, null);
         });
     }
 
@@ -99,7 +99,7 @@ class CreateUserServiceTest {
         String password = "test12353";
 
         // Act
-        User user = createUserService.createUser(name, email, password);
+        User user = createUserService.createUser(name, email, password, null);
 
         // Assert
         assertTrue(user.getIsActive());
@@ -113,7 +113,7 @@ class CreateUserServiceTest {
         String rawPassword = "myPassword123";
 
         // Act
-        User user = createUserService.createUser(name, email, rawPassword);
+        User user = createUserService.createUser(name, email, rawPassword, null);
 
         // Assert
         assertNotEquals(rawPassword, user.getPassword(), "Password should be hashed");

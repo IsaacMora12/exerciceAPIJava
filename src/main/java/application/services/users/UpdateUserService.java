@@ -4,6 +4,7 @@ import domain.model.user.User;
 import domain.port.PasswordHasher;
 import domain.port.users.UserRepository;
 import domain.port.users.in.UpdateUserUseCase;
+import infrastructure.adapter.out.persistence.user.UserEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,7 +19,7 @@ public class UpdateUserService implements UpdateUserUseCase {
     }
 
     @Override
-    public User updateUser(Long id, String name, String email, String password, Boolean isActive) {
+    public User updateUser(Long id, String name, String email, String password, Boolean isActive, UserEntity.Rol rol) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
@@ -39,6 +40,9 @@ public class UpdateUserService implements UpdateUserUseCase {
             } else {
                 user.deactivate();
             }
+        }
+        if (rol != null) {
+            user.updateRol(rol);
         }
 
         return userRepository.save(user);

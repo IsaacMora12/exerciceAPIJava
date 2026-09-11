@@ -15,12 +15,12 @@ public class AddMemberService implements AddMemberUseCase {
     }
 
     @Override
-    public Membership addMember(Long userId, Long teamId, Long roleId) {
+    public Membership addMember(Long userId, Long teamId, String role) {
         if (membershipRepository.existsByUserIdAndTeamId(userId, teamId)) {
             throw new IllegalArgumentException("User is already a member of this team");
         }
 
-        Membership membership = Membership.create(userId, teamId, roleId);
+        Membership membership = Membership.create(userId, teamId, role);
         return membershipRepository.save(membership);
     }
 }

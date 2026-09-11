@@ -20,8 +20,8 @@ public class MembershipEntity {
     @Column(name = "team_id", nullable = false)
     private Long teamId;
 
-    @Column(name = "role_id")
-    private Long roleId;
+    @Column(nullable = false)
+    private String role;
 
     @Column(name = "is_active", nullable = false)
     private Boolean isActive;
@@ -34,12 +34,12 @@ public class MembershipEntity {
 
     public MembershipEntity() {}
 
-    public MembershipEntity(Long id, Long userId, Long teamId, Long roleId,
+    public MembershipEntity(Long id, Long userId, Long teamId, String role,
                             Boolean isActive, LocalDateTime joinedAt, LocalDateTime updatedAt) {
         this.id = id;
         this.userId = userId;
         this.teamId = teamId;
-        this.roleId = roleId;
+        this.role = role;
         this.isActive = isActive;
         this.joinedAt = joinedAt;
         this.updatedAt = updatedAt;
@@ -52,8 +52,8 @@ public class MembershipEntity {
     public void setUserId(Long userId) { this.userId = userId; }
     public Long getTeamId() { return teamId; }
     public void setTeamId(Long teamId) { this.teamId = teamId; }
-    public Long getRoleId() { return roleId; }
-    public void setRoleId(Long roleId) { this.roleId = roleId; }
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
     public Boolean getIsActive() { return isActive; }
     public void setIsActive(Boolean isActive) { this.isActive = isActive; }
     public LocalDateTime getJoinedAt() { return joinedAt; }

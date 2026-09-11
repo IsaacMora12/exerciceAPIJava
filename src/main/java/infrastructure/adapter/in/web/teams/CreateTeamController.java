@@ -5,11 +5,12 @@ import domain.port.teams.in.CreateTeamUseCase;
 import infrastructure.adapter.in.web.teams.dto.CreateTeamRequest;
 import infrastructure.adapter.in.web.teams.dto.ErrorResponse;
 import infrastructure.adapter.in.web.teams.dto.TeamResponse;
+import infrastructure.adapter.out.persistence.auth.CustomUserDetails;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,10 +18,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/teams/create")
+@RequestMapping("/api/teams")
 @Tag(name = "Teams", description = "Endpoints for team management")
 public class CreateTeamController {
 
@@ -34,10 +37,10 @@ public class CreateTeamController {
 
     @Operation(
             summary = "Create Team",
-            description = "Create a new team in the application"
+            description = "Create a new team. The owner is the authenticated user from the JWT token."
     )
-    @RequestBody(
-            description = "Payload required to create a new team",
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            description = "Payload required to create a new team (owner comes from JWT token)",
             required = true,
             content = @Content(
                     mediaType = "application/json",
@@ -49,7 +52,6 @@ public class CreateTeamController {
                 {
                   "name": "Engineering",
                   "slug": "engineering",
-                  "owner": "john.doe@example.com",
                   "description": "Backend development team"
                 }
                 """
@@ -61,10 +63,15 @@ public class CreateTeamController {
             @ApiResponse(responseCode = "400", description = "Invalid request payload or validation error",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<?> createTeam(@RequestBody CreateTeamRequest request) {
         try {
-            Team createdTeam = createTeamUseCase.createTeam(request.name(), request.slug(), request.description(), request.owner());
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            CustomUserDetails currentUser = (CustomUserDetails) authentication.getPrincipal();
+            Long ownerId = currentUser.getId();
+
+            Team createdTeam = createTeamUseCase.createTeam(
+                    request.name(), request.slug(), request.description(), ownerId);
 
             TeamResponse response = new TeamResponse(
                     createdTeam.getId(),
@@ -77,7 +84,7 @@ public class CreateTeamController {
                     createdTeam.getUpdatedAt()
             );
 
-            log.info("Team created successfully: id={}, name={}", response.id(), response.name());
+            log.info("Team created successfully: id={}, name={}, owner={}", response.id(), response.name(), ownerId);
             return new ResponseEntity<>(response, HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
             log.warn("Failed to create team: {}", e.getMessage());

@@ -14,20 +14,20 @@ public class Invitation {
     private Long id;
     private Long teamId;
     private String email;
-    private Long roleId;
+    private String role;
     private String token;
     private Status status;
     private LocalDateTime expiresAt;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    private Invitation(Long id, Long teamId, String email, Long roleId, String token,
+    private Invitation(Long id, Long teamId, String email, String role, String token,
                        Status status, LocalDateTime expiresAt, LocalDateTime createdAt, LocalDateTime updatedAt) {
         validateEmail(email);
         this.id = id;
         this.teamId = teamId;
         this.email = email;
-        this.roleId = roleId;
+        this.role = role;
         this.token = token;
         this.status = status;
         this.expiresAt = expiresAt;
@@ -36,18 +36,18 @@ public class Invitation {
     }
 
     // Factory 1: Create new invitation
-    public static Invitation create(Long teamId, String email, Long roleId, String token, LocalDateTime expiresAt) {
+    public static Invitation create(Long teamId, String email, String role, String token, LocalDateTime expiresAt) {
         LocalDateTime now = LocalDateTime.now();
-        return new Invitation(null, teamId, email, roleId, token, Status.PENDING, expiresAt, now, now);
+        return new Invitation(null, teamId, email, role, token, Status.PENDING, expiresAt, now, now);
     }
 
     // Factory 2: Reconstruct from DB
-    public static Invitation reconstruct(Long id, Long teamId, String email, Long roleId, String token,
+    public static Invitation reconstruct(Long id, Long teamId, String email, String role, String token,
                                          Status status, LocalDateTime expiresAt, LocalDateTime createdAt, LocalDateTime updatedAt) {
         if (id == null) {
             throw new IllegalArgumentException("The id must not be empty for an existing invitation");
         }
-        return new Invitation(id, teamId, email, roleId, token, status, expiresAt, createdAt, updatedAt);
+        return new Invitation(id, teamId, email, role, token, status, expiresAt, createdAt, updatedAt);
     }
 
     public void accept() {
@@ -88,7 +88,7 @@ public class Invitation {
     public Long getId() { return id; }
     public Long getTeamId() { return teamId; }
     public String getEmail() { return email; }
-    public Long getRoleId() { return roleId; }
+    public String getRole() { return role; }
     public String getToken() { return token; }
     public Status getStatus() { return status; }
     public LocalDateTime getExpiresAt() { return expiresAt; }

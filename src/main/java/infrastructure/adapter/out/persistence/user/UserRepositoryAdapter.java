@@ -23,7 +23,12 @@ public class UserRepositoryAdapter implements UserRepository {
         UserEntity savedEntity = springDataUserRepository.save(entity);
         return UserPersistenceMapper.toDomain(savedEntity);
     }
-
+    @Override
+    public List<User> findByRol(UserEntity.Rol rol) {
+        return springDataUserRepository.findByRol(rol).stream()
+                .map(UserPersistenceMapper::toDomain)
+                .collect(Collectors.toList());
+    }
     @Override
     public Optional<User> findById(Long id) {
         return springDataUserRepository.findById(id)

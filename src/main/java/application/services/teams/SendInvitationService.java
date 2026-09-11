@@ -18,13 +18,13 @@ public class SendInvitationService implements SendInvitationUseCase {
     }
 
     @Override
-    public Invitation sendInvitation(Long teamId, String email, Long roleId, LocalDateTime expiresAt) {
+    public Invitation sendInvitation(Long teamId, String email, String role, LocalDateTime expiresAt) {
         // Check if there's already a pending invitation for this email in this team
         invitationRepository.findByTeamIdAndEmailAndStatus(teamId, email, Invitation.Status.PENDING)
                 .ifPresent(i -> { throw new IllegalArgumentException("A pending invitation already exists for this email"); });
 
         String token = UUID.randomUUID().toString();
-        Invitation invitation = Invitation.create(teamId, email, roleId, token, expiresAt);
+        Invitation invitation = Invitation.create(teamId, email, role, token, expiresAt);
         return invitationRepository.save(invitation);
     }
 }

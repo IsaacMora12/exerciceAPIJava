@@ -18,8 +18,8 @@ public class InvitationEntity {
     @Column(nullable = false)
     private String email;
 
-    @Column(name = "role_id")
-    private Long roleId;
+    @Column(nullable = false)
+    private String role;
 
     @Column(nullable = false, unique = true)
     private String token;
@@ -46,13 +46,13 @@ public class InvitationEntity {
 
     public InvitationEntity() {}
 
-    public InvitationEntity(Long id, Long teamId, String email, Long roleId, String token,
+    public InvitationEntity(Long id, Long teamId, String email, String role, String token,
                             InvitationStatus status, LocalDateTime expiresAt,
                             LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.teamId = teamId;
         this.email = email;
-        this.roleId = roleId;
+        this.role = role;
         this.token = token;
         this.status = status;
         this.expiresAt = expiresAt;
@@ -67,8 +67,8 @@ public class InvitationEntity {
     public void setTeamId(Long teamId) { this.teamId = teamId; }
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
-    public Long getRoleId() { return roleId; }
-    public void setRoleId(Long roleId) { this.roleId = roleId; }
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
     public String getToken() { return token; }
     public void setToken(String token) { this.token = token; }
     public InvitationStatus getStatus() { return status; }

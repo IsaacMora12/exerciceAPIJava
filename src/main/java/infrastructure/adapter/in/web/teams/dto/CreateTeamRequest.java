@@ -10,9 +10,6 @@ public record CreateTeamRequest(
         @Schema(description = "Team slug (unique identifier)", example = "engineering")
         String slug,
 
-        @Schema(description = "Team owner (user ID)", example = "1")
-        Long owner,
-
         @Schema(description = "Team description", example = "Backend development team")
         String description
 ) {}

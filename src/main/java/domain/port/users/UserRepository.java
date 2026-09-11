@@ -1,6 +1,7 @@
 package domain.port.users;
 
 import domain.model.user.User;
+import infrastructure.adapter.out.persistence.user.UserEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +17,7 @@ public interface UserRepository {
     List<User> findAll();
 
     List<User> findByActive(Boolean isActive);
+    List<User> findByRol(UserEntity.Rol rol);
 
     void deleteById(Long id);
 }

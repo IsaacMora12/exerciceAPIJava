@@ -11,5 +11,5 @@ public interface SpringDataUserRepository extends JpaRepository<UserEntity, Long
 {
     Optional<UserEntity> findByEmail(String email);
     List<UserEntity> findByIsActive(Boolean isActive);
-
+    List<UserEntity> findByRol(UserEntity.Rol rol);
 }

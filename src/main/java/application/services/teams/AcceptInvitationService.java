@@ -31,7 +31,7 @@ public class AcceptInvitationService implements AcceptInvitationUseCase {
             throw new IllegalArgumentException("User is already a member of this team");
         }
 
-        Membership membership = Membership.create(userId, invitation.getTeamId(), invitation.getRoleId());
+        Membership membership = Membership.create(userId, invitation.getTeamId(), invitation.getRole());
         return membershipRepository.save(membership);
     }
 }

@@ -7,6 +7,6 @@ public record AddMemberRequest(
         @Schema(description = "User ID", example = "1")
         Long userId,
 
-        @Schema(description = "Role ID to assign", example = "1")
-        Long roleId
+        @Schema(description = "Role (must be 'admin' or 'member')", example = "member")
+        String role
 ) {}

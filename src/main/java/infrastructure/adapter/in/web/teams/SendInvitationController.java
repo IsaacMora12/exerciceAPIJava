@@ -30,7 +30,7 @@ public class SendInvitationController {
         this.sendInvitationUseCase = sendInvitationUseCase;
     }
 
-    @Operation(summary = "Send Invitation", description = "Send an invitation to join a team")
+    @Operation(summary = "Send Invitation", description = "Send an invitation to join a team with a role ('admin' or 'member')")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Invitation sent successfully"),
             @ApiResponse(responseCode = "400", description = "Invalid request",
@@ -40,11 +40,11 @@ public class SendInvitationController {
     public ResponseEntity<?> sendInvitation(@PathVariable Long teamId, @RequestBody SendInvitationRequest request) {
         try {
             Invitation invitation = sendInvitationUseCase.sendInvitation(
-                    teamId, request.email(), request.roleId(), request.expiresAt());
+                    teamId, request.email(), request.role(), request.expiresAt());
 
             InvitationResponse response = new InvitationResponse(
                     invitation.getId(), invitation.getTeamId(), invitation.getEmail(),
-                    invitation.getRoleId(), invitation.getToken(),
+                    invitation.getRole(), invitation.getToken(),
                     invitation.getStatus().name(), invitation.getExpiresAt(),
                     invitation.getCreatedAt(), invitation.getUpdatedAt()
             );

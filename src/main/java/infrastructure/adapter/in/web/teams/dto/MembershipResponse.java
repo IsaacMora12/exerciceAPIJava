@@ -15,8 +15,8 @@ public record MembershipResponse(
         @Schema(description = "Team ID", example = "1")
         Long teamId,
 
-        @Schema(description = "Role ID", example = "1")
-        Long roleId,
+        @Schema(description = "Role", example = "member")
+        String role,
 
         @Schema(description = "Is active member", example = "true")
         Boolean isActive,

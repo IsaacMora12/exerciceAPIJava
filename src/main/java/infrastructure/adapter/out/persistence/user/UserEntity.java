@@ -1,12 +1,17 @@
 package infrastructure.adapter.out.persistence.user;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class UserEntity
+public class UserEntity implements UserDetails
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,18 +22,25 @@ public class UserEntity
     private String email;
     @Column(nullable = false)
     private String password;
+    @Enumerated(EnumType.STRING)
+    private Rol rol;
     @Column(name="is_active", nullable = false)
     private Boolean isActive;
     @Column(name="create_at", nullable = false)
     private LocalDateTime createdAt;
     @Column(name="update_at", nullable = false)
     private LocalDateTime updatedAt;
-    public UserEntity(){}
-    public UserEntity(Long id, String name, String email, String password, Boolean isActive, LocalDateTime createdAt, LocalDateTime updatedAt) {
+
+    protected UserEntity() {
+        // Constructor vacío requerido por Hibernate/JPA para instanciar entidades desde la BD
+    }
+
+    public UserEntity(Long id, String name, String email, String password, Boolean isActive, LocalDateTime createdAt, LocalDateTime updatedAt, Rol rol) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
+        this.rol = rol;
         this.isActive = isActive;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -40,8 +52,26 @@ public class UserEntity
     public void setName(String name) { this.name = name; }
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(rol.name()));
+    }
+
     public String getPassword() { return password; }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    public enum Rol {
+        USER, ADMIN
+    }
+
     public void setPassword(String password) { this.password = password; }
+    public Rol getRol() {return rol;}
+    public void setRol(Rol rol) {this.rol = rol;}
     public Boolean getIsActive() { return isActive; }
     public void setIsActive(Boolean isActive) { this.isActive = isActive; }
     public LocalDateTime getCreatedAt() { return createdAt; }

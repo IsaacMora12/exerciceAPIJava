@@ -18,7 +18,8 @@ public class UserPersistenceMapper {
                 domain.getPassword(),
                 domain.getIsActive(),
                 domain.getCreatedAt(),
-                domain.getUpdatedAt()
+                domain.getUpdatedAt(),
+                domain.getRol()
         );
         log.debug("Mapping domain user to entity: id={}, email={}", domain.getId(), domain.getEmail());
         return entity;
@@ -33,9 +34,11 @@ public class UserPersistenceMapper {
                 entity.getName(),
                 entity.getEmail(),
                 entity.getPassword(),
+                entity.getRol(),
                 entity.getIsActive(),
                 entity.getCreatedAt(),
                 entity.getUpdatedAt()
+
         );
     }
 }

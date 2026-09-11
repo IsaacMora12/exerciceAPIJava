@@ -15,7 +15,7 @@ public class MembershipPersistenceMapper {
                 domain.getId(),
                 domain.getUserId(),
                 domain.getTeamId(),
-                domain.getRoleId(),
+                domain.getRole(),
                 domain.getIsActive(),
                 domain.getJoinedAt(),
                 domain.getUpdatedAt()
@@ -34,7 +34,7 @@ public class MembershipPersistenceMapper {
                 entity.getId(),
                 entity.getUserId(),
                 entity.getTeamId(),
-                entity.getRoleId(),
+                entity.getRole(),
                 entity.getIsActive(),
                 entity.getJoinedAt(),
                 entity.getUpdatedAt()

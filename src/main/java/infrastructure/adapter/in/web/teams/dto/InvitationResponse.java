@@ -15,8 +15,8 @@ public record InvitationResponse(
         @Schema(description = "Invited email", example = "john.doe@example.com")
         String email,
 
-        @Schema(description = "Role ID assigned", example = "1")
-        Long roleId,
+        @Schema(description = "Role assigned", example = "member")
+        String role,
 
         @Schema(description = "Invitation token")
         String token,

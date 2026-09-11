@@ -9,7 +9,7 @@ import domain.port.users.UserRepository;
 public class TestDataFactory {
     public static User createOwner(UserRepository userRepository)
     {
-        return userRepository.save(User.create("testUser", "test@test.com","abctest"));
+        return userRepository.save(User.create("testUser", "test@test.com","abctest12"));
     }
     public static Team crateTeam(CreateTeamService createTeamService, String name, String slug, String description, Long owner )
     {

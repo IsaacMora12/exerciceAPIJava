@@ -30,7 +30,7 @@ public class AddMemberController {
         this.addMemberUseCase = addMemberUseCase;
     }
 
-    @Operation(summary = "Add Member", description = "Add a user to a team with a specific role")
+    @Operation(summary = "Add Member", description = "Add a user to a team with a role ('admin' or 'member')")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Member added successfully"),
             @ApiResponse(responseCode = "400", description = "Invalid request",
@@ -39,11 +39,11 @@ public class AddMemberController {
     @PostMapping
     public ResponseEntity<?> addMember(@PathVariable Long teamId, @RequestBody AddMemberRequest request) {
         try {
-            Membership membership = addMemberUseCase.addMember(request.userId(), teamId, request.roleId());
+            Membership membership = addMemberUseCase.addMember(request.userId(), teamId, request.role());
 
             MembershipResponse response = new MembershipResponse(
                     membership.getId(), membership.getUserId(), membership.getTeamId(),
-                    membership.getRoleId(), membership.getIsActive(),
+                    membership.getRole(), membership.getIsActive(),
                     membership.getJoinedAt(), membership.getUpdatedAt()
             );
 
