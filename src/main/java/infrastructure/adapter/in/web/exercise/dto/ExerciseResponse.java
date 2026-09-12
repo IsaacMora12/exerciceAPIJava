@@ -13,8 +13,17 @@ public record ExerciseResponse(
         @Schema(description = "Exercise name", example = "Barbell Bicep Curl")
         String name,
 
-        @Schema(description = "Exercise description", example = "Standing curl with barbell targeting biceps")
-        String description,
+        @Schema(description = "Exercise description")
+        List<String> description,
+
+        @Schema(description = "Exercise category", example = "Strength")
+        String category,
+
+        @Schema(description = "Step-by-step instructions")
+        List<String> instruccion,
+
+        @Schema(description = "Required equipment", example = "Barbell")
+        String equipament,
 
         @Schema(description = "Main muscle ID", example = "1")
         Long mainMuscle,

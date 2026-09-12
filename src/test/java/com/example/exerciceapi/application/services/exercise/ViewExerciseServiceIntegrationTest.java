@@ -29,8 +29,9 @@ class ViewExerciseServiceIntegrationTest {
     @BeforeEach
     void setUp() {
         existingExercise = exerciseRepository.save(
-                Exercise.create("Test Exercise", "desc", 1L,
-                        List.of(2L), List.of("img.jpg"), List.of("vid.mp4"), 1L));
+                Exercise.create("Test Exercise", List.of("desc"), "Strength",
+                        List.of("Step 1"), "Barbell", 1L, List.of(2L),
+                        List.of("img.jpg"), List.of("vid.mp4"), 1L));
     }
 
     @Test
@@ -55,7 +56,9 @@ class ViewExerciseServiceIntegrationTest {
 
         assertEquals(existingExercise.getId(), found.getId());
         assertEquals("Test Exercise", found.getName());
-        assertEquals("desc", found.getDescription());
+        assertEquals(List.of("desc"), found.getDescription());
+        assertEquals("Strength", found.getCategory());
+        assertEquals("Barbell", found.getEquipament());
         assertEquals(List.of(2L), found.getOthersMuscle());
         assertEquals(List.of("img.jpg"), found.getImages());
         assertEquals(List.of("vid.mp4"), found.getVideos());

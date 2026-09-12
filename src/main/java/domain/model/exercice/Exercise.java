@@ -9,7 +9,10 @@ public class Exercise {
 
     private Long id;
     private String name;
-    private String description;
+    private List<String> description;
+    private String category;
+    private List<String> instruccion;
+    private String equipament;
     private Long mainMuscle;
     private List<Long> othersMuscle;
     private List<String> images;
@@ -19,15 +22,20 @@ public class Exercise {
     private LocalDateTime updatedAt;
     private Long updatedBy;
 
-    private Exercise(Long id, String name, String description, Long mainMuscle,
-                     List<Long> othersMuscle, List<String> images, List<String> videos,
+    private Exercise(Long id, String name, List<String> description, String category,
+                     List<String> instruccion, String equipament,
+                     Long mainMuscle, List<Long> othersMuscle,
+                     List<String> images, List<String> videos,
                      Boolean isActive,
                      LocalDateTime createdAt, LocalDateTime updatedAt, Long updatedBy) {
         validateName(name);
         validateMainMuscle(mainMuscle);
         this.id = id;
         this.name = name;
-        this.description = description;
+        this.description = description != null ? new ArrayList<>(description) : new ArrayList<>();
+        this.category = category;
+        this.instruccion = instruccion != null ? new ArrayList<>(instruccion) : new ArrayList<>();
+        this.equipament = equipament;
         this.mainMuscle = mainMuscle;
         this.othersMuscle = othersMuscle != null ? new ArrayList<>(othersMuscle) : new ArrayList<>();
         this.images = images != null ? new ArrayList<>(images) : new ArrayList<>();
@@ -39,24 +47,27 @@ public class Exercise {
     }
 
     // Factory 1: Crear ejercicio nuevo
-    public static Exercise create(String name, String description, Long mainMuscle,
-                                  List<Long> othersMuscle, List<String> images,
-                                  List<String> videos, Long updatedBy) {
+    public static Exercise create(String name, List<String> description, String category,
+                                  List<String> instruccion, String equipament,
+                                  Long mainMuscle, List<Long> othersMuscle,
+                                  List<String> images, List<String> videos, Long updatedBy) {
         LocalDateTime now = LocalDateTime.now();
-        return new Exercise(null, name, description, mainMuscle,
-                othersMuscle, images, videos, true, now, now, updatedBy);
+        return new Exercise(null, name, description, category, instruccion, equipament,
+                mainMuscle, othersMuscle, images, videos, true, now, now, updatedBy);
     }
 
     // Factory 2: Reconstruir ejercicio desde la BD
-    public static Exercise reconstruct(Long id, String name, String description, Long mainMuscle,
-                                       List<Long> othersMuscle, List<String> images,
-                                       List<String> videos, Boolean isActive,
+    public static Exercise reconstruct(Long id, String name, List<String> description, String category,
+                                       List<String> instruccion, String equipament,
+                                       Long mainMuscle, List<Long> othersMuscle,
+                                       List<String> images, List<String> videos,
+                                       Boolean isActive,
                                        LocalDateTime createdAt, LocalDateTime updatedAt, Long updatedBy) {
         if (id == null) {
             throw new IllegalArgumentException("The id must not be empty for an existing exercise");
         }
-        return new Exercise(id, name, description, mainMuscle,
-                othersMuscle, images, videos, isActive, createdAt, updatedAt, updatedBy);
+        return new Exercise(id, name, description, category, instruccion, equipament,
+                mainMuscle, othersMuscle, images, videos, isActive, createdAt, updatedAt, updatedBy);
     }
 
     // Métodos de negocio
@@ -76,8 +87,23 @@ public class Exercise {
         updateTimestamp();
     }
 
-    public void updateDescription(String description) {
-        this.description = description;
+    public void updateDescription(List<String> description) {
+        this.description = description != null ? new ArrayList<>(description) : new ArrayList<>();
+        updateTimestamp();
+    }
+
+    public void updateCategory(String category) {
+        this.category = category;
+        updateTimestamp();
+    }
+
+    public void updateInstruccion(List<String> instruccion) {
+        this.instruccion = instruccion != null ? new ArrayList<>(instruccion) : new ArrayList<>();
+        updateTimestamp();
+    }
+
+    public void updateEquipament(String equipament) {
+        this.equipament = equipament;
         updateTimestamp();
     }
 
@@ -189,7 +215,10 @@ public class Exercise {
     // Getters
     public Long getId() { return id; }
     public String getName() { return name; }
-    public String getDescription() { return description; }
+    public List<String> getDescription() { return Collections.unmodifiableList(description); }
+    public String getCategory() { return category; }
+    public List<String> getInstruccion() { return Collections.unmodifiableList(instruccion); }
+    public String getEquipament() { return equipament; }
     public Long getMainMuscle() { return mainMuscle; }
     public List<Long> getOthersMuscle() { return Collections.unmodifiableList(othersMuscle); }
     public List<String> getImages() { return Collections.unmodifiableList(images); }

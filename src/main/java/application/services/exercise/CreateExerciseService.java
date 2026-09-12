@@ -17,15 +17,16 @@ public class CreateExerciseService implements CreateExerciseUseCase {
     }
 
     @Override
-    public Exercise createExercise(String name, String description, Long mainMuscle,
-                                   List<Long> othersMuscle, List<String> images,
-                                   List<String> videos, Long updatedBy) {
+    public Exercise createExercise(String name, List<String> description, String category,
+                                   List<String> instruccion, String equipament,
+                                   Long mainMuscle, List<Long> othersMuscle,
+                                   List<String> images, List<String> videos, Long updatedBy) {
         if (exerciseRepository.findByName(name).isPresent()) {
             throw new IllegalArgumentException("Exercise name duplicated: " + name);
         }
 
-        Exercise newExercise = Exercise.create(name, description, mainMuscle,
-                othersMuscle, images, videos, updatedBy);
+        Exercise newExercise = Exercise.create(name, description, category, instruccion, equipament,
+                mainMuscle, othersMuscle, images, videos, updatedBy);
 
         return exerciseRepository.save(newExercise);
     }

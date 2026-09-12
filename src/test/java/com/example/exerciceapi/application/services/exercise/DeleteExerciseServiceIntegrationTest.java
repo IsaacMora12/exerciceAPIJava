@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -26,7 +28,7 @@ class DeleteExerciseServiceIntegrationTest {
     @BeforeEach
     void setUp() {
         existingExercise = exerciseRepository.save(
-                Exercise.create("To Delete", "desc", 1L, null, null, null, 1L));
+                Exercise.create("To Delete", List.of("desc"), "Cat", null, null, 1L, null, null, null, 1L));
     }
 
     @Test
@@ -45,7 +47,7 @@ class DeleteExerciseServiceIntegrationTest {
     @Test
     void shouldDeleteOnlySpecifiedExercise() {
         Exercise other = exerciseRepository.save(
-                Exercise.create("Other", "desc", 1L, null, null, null, 1L));
+                Exercise.create("Other", List.of("desc"), "Cat", null, null, 1L, null, null, null, 1L));
 
         deleteExerciseService.deleteExercise(existingExercise.getId());
 

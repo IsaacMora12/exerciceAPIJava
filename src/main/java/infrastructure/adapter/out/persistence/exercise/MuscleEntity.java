@@ -19,7 +19,7 @@ public class MuscleEntity {
     @Column(length = 500)
     private String description;
 
-    @Column(columnDefinition = "json")
+    @Column
     @Convert(converter = ListStringConverter.class)
     private List<String> images;
 

@@ -1,10 +1,12 @@
 package infrastructure.adapter.in.web.exercise.dto;
 
+import tools.jackson.databind.annotation.JsonDeserialize;
+import infrastructure.adapter.in.web.jackson.StringListDeserializer;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.List;
 
-@Schema(description = "Payload required to create a new muscle")
+@Schema(description = "Payload required to create a muscle")
 public record CreateMuscleRequest(
         @Schema(description = "Muscle name", example = "Bicep")
         String name,
@@ -13,5 +15,6 @@ public record CreateMuscleRequest(
         String description,
 
         @Schema(description = "List of image URLs for the muscle", example = "[\"https://example.com/bicep.jpg\"]")
+        @JsonDeserialize(using = StringListDeserializer.class)
         List<String> images
 ) {}

@@ -18,9 +18,11 @@ public class UpdateExerciseService implements UpdateExerciseUseCase {
     }
 
     @Override
-    public Exercise updateExercise(Long id, String name, String description, Long mainMuscle,
-                                   List<Long> othersMuscle, List<String> images,
-                                   List<String> videos, Boolean isActive, Long updatedBy) {
+    public Exercise updateExercise(Long id, String name, List<String> description, String category,
+                                   List<String> instruccion, String equipament,
+                                   Long mainMuscle, List<Long> othersMuscle,
+                                   List<String> images, List<String> videos,
+                                   Boolean isActive, Long updatedBy) {
         Exercise existing = exerciseRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Exercise not found with id: " + id));
 
@@ -31,6 +33,9 @@ public class UpdateExerciseService implements UpdateExerciseUseCase {
 
         existing.updateName(name);
         existing.updateDescription(description);
+        existing.updateCategory(category);
+        existing.updateInstruccion(instruccion);
+        existing.updateEquipament(equipament);
         existing.updateMainMuscle(mainMuscle);
         existing.updateOthersMuscle(othersMuscle);
         existing.updateImages(images);

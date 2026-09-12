@@ -51,10 +51,9 @@ class DeleteMuscleServiceIntegrationTest {
 
     @Test
     void shouldThrowExceptionWhenMuscleIsUsedByExercise() {
-        // Create an exercise that references this muscle
         exerciseRepository.save(
-                Exercise.create("Exercise Using Muscle", "desc", existingMuscle.getId(),
-                        null, null, null, 1L));
+                Exercise.create("Exercise Using Muscle", List.of("desc"), "Cat",
+                        null, null, existingMuscle.getId(), null, null, null, 1L));
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 deleteMuscleService.deleteMuscle(existingMuscle.getId()));
@@ -64,10 +63,9 @@ class DeleteMuscleServiceIntegrationTest {
 
     @Test
     void shouldThrowExceptionWhenMuscleIsUsedAsSecondaryMuscle() {
-        // Create an exercise that references this muscle as secondary
         exerciseRepository.save(
-                Exercise.create("Exercise With Secondary", "desc", 99L,
-                        List.of(existingMuscle.getId()), null, null, 1L));
+                Exercise.create("Exercise With Secondary", List.of("desc"), "Cat",
+                        null, null, 99L, List.of(existingMuscle.getId()), null, null, 1L));
 
         assertThrows(IllegalArgumentException.class, () ->
                 deleteMuscleService.deleteMuscle(existingMuscle.getId()));

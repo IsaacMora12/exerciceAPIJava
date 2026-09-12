@@ -52,14 +52,19 @@ public class UpdateExerciseController {
             Long userId = currentUser.getId();
 
             Exercise updatedExercise = updateExerciseUseCase.updateExercise(
-                    id, request.name(), request.description(), request.mainMuscle(),
-                    request.othersMuscle(), request.images(), request.videos(),
+                    id, request.name(), request.description(), request.category(),
+                    request.instruccion(), request.equipament(),
+                    request.mainMuscle(), request.othersMuscle(),
+                    request.images(), request.videos(),
                     request.isActive(), userId);
 
             ExerciseResponse response = new ExerciseResponse(
                     updatedExercise.getId(),
                     updatedExercise.getName(),
                     updatedExercise.getDescription(),
+                    updatedExercise.getCategory(),
+                    updatedExercise.getInstruccion(),
+                    updatedExercise.getEquipament(),
                     updatedExercise.getMainMuscle(),
                     updatedExercise.getOthersMuscle(),
                     updatedExercise.getImages(),
