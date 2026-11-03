@@ -1,0 +1,35 @@
+[
+  {
+    "name": "SeedTestBenchPress",
+    "description": {"en": "Bench press"},
+    "category": "Strength",
+    "instruccion": {"en": ["Step 1"]},
+    "equipament": "Barbell",
+    "mainMuscle": "SeedTestBenchMuscle",
+    "othersMuscle": ["SeedTestSquatMuscle"],
+    "images": ["https://example.com/0001-2gPfomN.jpg"],
+    "videos": ["https://example.com/0001-2gPfomN.gif"]
+  },
+  {
+    "name": "SeedTestFrontSquat",
+    "description": {"en": "Front squat"},
+    "category": "Strength",
+    "instruccion": {"en": ["Step 1"]},
+    "equipament": "Barbell",
+    "mainMuscle": "SeedTestSquatMuscle",
+    "othersMuscle": [],
+    "images": ["https://example.com/missing-exercise-image.jpg"],
+    "videos": ["https://example.com/0002-Hy9D21L.gif"]
+  },
+  {
+    "name": "SeedTestBenchPress",
+    "description": {"en": "Duplicate row inside the source file"},
+    "category": "Strength",
+    "instruccion": {"en": ["Step 1"]},
+    "equipament": "Barbell",
+    "mainMuscle": "SeedTestBenchMuscle",
+    "othersMuscle": [],
+    "images": [],
+    "videos": []
+  }
+]

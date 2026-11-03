@@ -1,11 +1,12 @@
 package application.services.exercise;
 
-import domain.model.exercice.Exercise;
+import domain.model.exercise.Exercise;
 import domain.port.exercise.ExerciseRepository;
 import domain.port.exercise.in.UpdateExerciseUseCase;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -18,9 +19,11 @@ public class UpdateExerciseService implements UpdateExerciseUseCase {
     }
 
     @Override
-    public Exercise updateExercise(Long id, String name, String description, Long mainMuscle,
-                                   List<Long> othersMuscle, List<String> images,
-                                   List<String> videos, Boolean isActive, Long updatedBy) {
+    public Exercise updateExercise(Long id, String name, Map<String, String> description, String category,
+                                   Map<String, List<String>> instruccion, String equipament,
+                                   Long mainMuscle, List<Long> othersMuscle,
+                                   List<String> images, List<String> videos,
+                                   Boolean isActive, Long updatedBy) {
         Exercise existing = exerciseRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Exercise not found with id: " + id));
 
@@ -31,6 +34,9 @@ public class UpdateExerciseService implements UpdateExerciseUseCase {
 
         existing.updateName(name);
         existing.updateDescription(description);
+        existing.updateCategory(category);
+        existing.updateInstruccion(instruccion);
+        existing.updateEquipament(equipament);
         existing.updateMainMuscle(mainMuscle);
         existing.updateOthersMuscle(othersMuscle);
         existing.updateImages(images);

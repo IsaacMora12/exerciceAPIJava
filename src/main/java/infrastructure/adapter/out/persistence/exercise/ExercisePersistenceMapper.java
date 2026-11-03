@@ -1,6 +1,6 @@
 package infrastructure.adapter.out.persistence.exercise;
 
-import domain.model.exercice.Exercise;
+import domain.model.exercise.Exercise;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,6 +15,9 @@ public class ExercisePersistenceMapper {
                 domain.getId(),
                 domain.getName(),
                 domain.getDescription(),
+                domain.getCategory(),
+                domain.getInstruccion(),
+                domain.getEquipament(),
                 domain.getMainMuscle(),
                 domain.getOthersMuscle(),
                 domain.getImages(),
@@ -36,6 +39,9 @@ public class ExercisePersistenceMapper {
                 entity.getId(),
                 entity.getName(),
                 entity.getDescription(),
+                entity.getCategory(),
+                entity.getInstruccion(),
+                entity.getEquipament(),
                 entity.getMainMuscle(),
                 entity.getOthersMuscle(),
                 entity.getImages(),

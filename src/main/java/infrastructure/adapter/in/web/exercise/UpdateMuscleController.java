@@ -1,7 +1,8 @@
 package infrastructure.adapter.in.web.exercise;
 
-import domain.model.exercice.Muscle;
+import domain.model.exercise.Muscle;
 import domain.port.exercise.in.UpdateMuscleUseCase;
+import infrastructure.adapter.in.web.MediaUrlResolver;
 import infrastructure.adapter.in.web.exercise.dto.MuscleResponse;
 import infrastructure.adapter.in.web.exercise.dto.UpdateMuscleRequest;
 import infrastructure.adapter.in.web.teams.dto.ErrorResponse;
@@ -28,9 +29,12 @@ public class UpdateMuscleController {
     private static final Logger log = LoggerFactory.getLogger(UpdateMuscleController.class);
 
     private final UpdateMuscleUseCase updateMuscleUseCase;
+    private final MediaUrlResolver mediaUrlResolver;
 
-    public UpdateMuscleController(UpdateMuscleUseCase updateMuscleUseCase) {
+    public UpdateMuscleController(UpdateMuscleUseCase updateMuscleUseCase,
+                                  MediaUrlResolver mediaUrlResolver) {
         this.updateMuscleUseCase = updateMuscleUseCase;
+        this.mediaUrlResolver = mediaUrlResolver;
     }
 
     @Operation(
@@ -59,7 +63,7 @@ public class UpdateMuscleController {
                     updatedMuscle.getId(),
                     updatedMuscle.getName(),
                     updatedMuscle.getDescription(),
-                    updatedMuscle.getImages(),
+                    mediaUrlResolver.toUrls(updatedMuscle.getImages()),
                     updatedMuscle.getIsActive(),
                     updatedMuscle.getCreatedAt(),
                     updatedMuscle.getUpdatedAt(),

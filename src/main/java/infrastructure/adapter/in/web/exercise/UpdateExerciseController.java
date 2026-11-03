@@ -1,7 +1,8 @@
 package infrastructure.adapter.in.web.exercise;
 
-import domain.model.exercice.Exercise;
+import domain.model.exercise.Exercise;
 import domain.port.exercise.in.UpdateExerciseUseCase;
+import infrastructure.adapter.in.web.MediaUrlResolver;
 import infrastructure.adapter.in.web.exercise.dto.ExerciseResponse;
 import infrastructure.adapter.in.web.exercise.dto.UpdateExerciseRequest;
 import infrastructure.adapter.in.web.teams.dto.ErrorResponse;
@@ -28,9 +29,12 @@ public class UpdateExerciseController {
     private static final Logger log = LoggerFactory.getLogger(UpdateExerciseController.class);
 
     private final UpdateExerciseUseCase updateExerciseUseCase;
+    private final MediaUrlResolver mediaUrlResolver;
 
-    public UpdateExerciseController(UpdateExerciseUseCase updateExerciseUseCase) {
+    public UpdateExerciseController(UpdateExerciseUseCase updateExerciseUseCase,
+                                    MediaUrlResolver mediaUrlResolver) {
         this.updateExerciseUseCase = updateExerciseUseCase;
+        this.mediaUrlResolver = mediaUrlResolver;
     }
 
     @Operation(
@@ -52,18 +56,23 @@ public class UpdateExerciseController {
             Long userId = currentUser.getId();
 
             Exercise updatedExercise = updateExerciseUseCase.updateExercise(
-                    id, request.name(), request.description(), request.mainMuscle(),
-                    request.othersMuscle(), request.images(), request.videos(),
+                    id, request.name(), request.description(), request.category(),
+                    request.instruccion(), request.equipament(),
+                    request.mainMuscle(), request.othersMuscle(),
+                    request.images(), request.videos(),
                     request.isActive(), userId);
 
             ExerciseResponse response = new ExerciseResponse(
                     updatedExercise.getId(),
                     updatedExercise.getName(),
                     updatedExercise.getDescription(),
+                    updatedExercise.getCategory(),
+                    updatedExercise.getInstruccion(),
+                    updatedExercise.getEquipament(),
                     updatedExercise.getMainMuscle(),
                     updatedExercise.getOthersMuscle(),
-                    updatedExercise.getImages(),
-                    updatedExercise.getVideos(),
+                    mediaUrlResolver.toUrls(updatedExercise.getImages()),
+                    mediaUrlResolver.toUrls(updatedExercise.getVideos()),
                     updatedExercise.getIsActive(),
                     updatedExercise.getCreatedAt(),
                     updatedExercise.getUpdatedAt(),

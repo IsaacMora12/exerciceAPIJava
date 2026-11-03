@@ -38,6 +38,12 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/users/create").permitAll()
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
+                        // SR2 (usuario aprobó): /media/** es permitAll INTENCIONAL.
+                        // El media local es contenido público — las claves del seed son
+                        // adivinables (ej. /media/images/5201-KOpzGBL.jpg), NO secretos.
+                        // Scope ajustado SOLO al path de media: /data/** y toda la API
+                        // siguen autenticados. Sin handler registrado (garage) es 404.
+                        .requestMatchers("/media/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session

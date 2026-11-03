@@ -1,6 +1,6 @@
 package infrastructure.adapter.out.persistence.exercise;
 
-import domain.model.exercice.Muscle;
+import domain.model.exercise.Muscle;
 import domain.port.exercise.ExerciseRepository;
 import domain.port.exercise.MuscleRepository;
 import org.springframework.stereotype.Component;

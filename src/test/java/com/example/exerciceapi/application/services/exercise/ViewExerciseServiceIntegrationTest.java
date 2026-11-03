@@ -1,6 +1,6 @@
 package com.example.exerciceapi.application.services.exercise;
 
-import domain.model.exercice.Exercise;
+import domain.model.exercise.Exercise;
 import domain.port.exercise.ExerciseRepository;
 import application.services.exercise.ViewExerciseService;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,8 +30,9 @@ class ViewExerciseServiceIntegrationTest {
     @BeforeEach
     void setUp() {
         existingExercise = exerciseRepository.save(
-                Exercise.create("Test Exercise", "desc", 1L,
-                        List.of(2L), List.of("img.jpg"), List.of("vid.mp4"), 1L));
+                Exercise.create("Test Exercise", Map.of("en", "desc"), "Strength",
+                        Map.of("en", List.of("Step 1")), "Barbell", 1L, List.of(2L),
+                        List.of("img.jpg"), List.of("vid.mp4"), 1L));
     }
 
     @Test
@@ -55,7 +57,9 @@ class ViewExerciseServiceIntegrationTest {
 
         assertEquals(existingExercise.getId(), found.getId());
         assertEquals("Test Exercise", found.getName());
-        assertEquals("desc", found.getDescription());
+        assertEquals(Map.of("en", "desc"), found.getDescription());
+        assertEquals("Strength", found.getCategory());
+        assertEquals("Barbell", found.getEquipament());
         assertEquals(List.of(2L), found.getOthersMuscle());
         assertEquals(List.of("img.jpg"), found.getImages());
         assertEquals(List.of("vid.mp4"), found.getVideos());

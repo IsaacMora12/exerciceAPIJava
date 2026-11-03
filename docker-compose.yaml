@@ -1,0 +1,109 @@
+# Deploy completo: ./scripts/deploy.sh
+#   (build de la imagen + up de postgres/garage + bootstrap de Garage + up de app/seed)
+# Flujo manual equivalente:
+#   1) docker compose up -d postgres garage
+#   2) ./scripts/garage-bootstrap.sh   # crea bucket 'exercise-app' + keys (idempotente)
+#   3) copiar las claves impresas a .env (GARAGE_ACCESS_KEY / GARAGE_SECRET_KEY)
+#   4) docker compose up -d            # levanta app + seed (seed espera healthchecks)
+# El servicio seed es one-shot e idempotente: si el contenedor se recrea en un
+# `docker compose up -d` posterior vuelve a correr y saltea lo ya existente.
+
+x-app-env: &app-env
+  SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB}
+  SPRING_DATASOURCE_USERNAME: ${POSTGRES_USERNAME}
+  SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+  # Garage vive en la RED DE COMPOSE: los containers lo alcanzan por DNS interno
+  # (http://garage:3900), sin pasar por el host ni por el firewall.
+  GARAGE_ENDPOINT: ${GARAGE_ENDPOINT:-http://garage:3900}
+  # URL que ven los browser: firma para el cliente, debe resolverse desde el host
+  # (puerto publicado 3900 → localhost, loopback lo permite).
+  GARAGE_PUBLIC_ENDPOINT: ${GARAGE_PUBLIC_ENDPOINT:-http://localhost:3900}
+  GARAGE_ACCESS_KEY: ${GARAGE_ACCESS_KEY:-}
+  GARAGE_SECRET_KEY: ${GARAGE_SECRET_KEY:-}
+  # public | presigned — presigned es el default correcto para Garage v2.x
+  GARAGE_URL_MODE: ${GARAGE_URL_MODE:-presigned}
+  # jwt.secret=${JWT_SECRET} se resuelve DENTRO del container: hay que inyectarla.
+  JWT_SECRET: ${JWT_SECRET:-}
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres-db
+    environment:
+      POSTGRES_DB:  ${POSTGRES_DB}
+      POSTGRES_USER:  ${POSTGRES_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      # Host:contenedor. Dev default 5434 (la 5432 del host la usa el PG del sistema);
+      # en producción setear POSTGRES_HOST_PORT=5432 en el .env/entorno.
+      - "${POSTGRES_HOST_PORT:-5434}:5434"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USERNAME} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  garage:
+    image: dxflrs/garage:v2.3.0
+    restart: unless-stopped
+    ports:
+      - "3900:3900"   # S3 API — la usa el browser vía presigned URLs (localhost:3900)
+      - "3902:3902"   # website endpoint (bucket website --allow)
+    volumes:
+      - ./garage.toml:/etc/garage.toml
+      - /var/lib/garage/meta:/var/lib/garage/meta
+      - /var/lib/garage/data:/var/lib/garage/data
+    healthcheck:
+      # La imagen no define ENTRYPOINT (solo CMD /garage server): hay que
+      # invocar el binario por su path absoluto. `garage layout show` es el
+      # mismo criterio que usa el bootstrap: necesita el daemon RPC vivo.
+      # El RPC 3901 NO se publica: rpc_public_addr es 127.0.0.1:3901 (garage.toml),
+      # el nodo único se conecta a sí mismo por loopback DENTRO del container.
+      test: ["CMD", "/garage", "layout", "show"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
+
+  app:
+    build: .
+    image: exerciceapi-app:latest
+    container_name: exercise-app-container
+    ports:
+      - "8080:8080"
+    environment:
+      <<: *app-env
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-dev}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      garage:
+        condition: service_started
+
+  # One-shot: corre DataInitializer (perfil seed) y TERMINA SOLO con exit 0 tras
+  # completar (seed.exit-after-run → System.exit(0); los fallos salen con exit 1
+  # por la excepción en main). Va como servlet normal con server.port=0 (puerto
+  # aleatorio, nadie se conecta) porque QUITAR el contexto web rompe el wiring de
+  # Spring Security: el @Bean authenticationManager de SecurityConfig necesita
+  # AuthenticationConfiguration, que solo existe en contexto web. Reutiliza la
+  # MISMA imagen que app (el `build: .` vive solo en app). Es idempotente por
+  # registro: si el contenedor se recrea en un `docker compose up -d` posterior
+  # vuelve a correr y cada registro ya existente se saltea (findByName antes del
+  # upload). Re-correrlo a mano:
+  #   docker compose run --rm seed
+  seed:
+    image: exerciceapi-app:latest
+    depends_on:
+      postgres:
+        condition: service_healthy
+      garage:
+        condition: service_healthy
+    environment:
+      <<: *app-env
+      SPRING_PROFILES_ACTIVE: garage,seed
+    command: ["java", "-jar", "app.jar", "--server.port=0", "--seed.exit-after-run=true"]
+    restart: "no"
+
+volumes:
+  postgres_data:

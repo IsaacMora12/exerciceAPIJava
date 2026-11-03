@@ -1,7 +1,6 @@
 package infrastructure.adapter.out.persistence.exercise;
 
 
-import domain.model.exercice.Exercise;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

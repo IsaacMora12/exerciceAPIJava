@@ -1,6 +1,6 @@
 package application.services.exercise;
 
-import domain.model.exercice.Exercise;
+import domain.model.exercise.Exercise;
 import domain.port.exercise.ExerciseRepository;
 import domain.port.exercise.in.ViewExerciseUseCase;
 import org.springframework.stereotype.Service;
