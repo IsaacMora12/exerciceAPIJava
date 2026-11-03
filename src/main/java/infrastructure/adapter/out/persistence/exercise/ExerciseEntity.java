@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Table(name = "exercises")
@@ -16,15 +17,15 @@ public class ExerciseEntity {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @Column
-    @Convert(converter = ListStringConverter.class)
-    private List<String> description;
+    @Column(length = 10000)
+    @Convert(converter = MapStringConverter.class)
+    private Map<String, String> description;
 
     private String category;
 
-    @Column
-    @Convert(converter = ListStringConverter.class)
-    private List<String> instruccion;
+    @Column(length = 10000)
+    @Convert(converter = MapStringListConverter.class)
+    private  Map<String, List<String>> instruccion;
 
     private String equipament;
 
@@ -57,8 +58,8 @@ public class ExerciseEntity {
 
     protected ExerciseEntity() {}
 
-    public ExerciseEntity(Long id, String name, List<String> description, String category,
-                          List<String> instruccion, String equipament,
+    public ExerciseEntity(Long id, String name, Map<String, String> description, String category,
+                         Map<String, List<String>> instruccion, String equipament,
                           Long mainMuscle, List<Long> othersMuscle,
                           List<String> images, List<String> videos,
                           Boolean isActive, LocalDateTime createdAt, LocalDateTime updatedAt,
@@ -84,12 +85,12 @@ public class ExerciseEntity {
     public void setId(Long id) { this.id = id; }
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
-    public List<String> getDescription() { return description; }
-    public void setDescription(List<String> description) { this.description = description; }
+    public Map<String, String> getDescription() { return description; }
+    public void setDescription(Map<String, String> description) { this.description = description; }
     public String getCategory() { return category; }
     public void setCategory(String category) { this.category = category; }
-    public List<String> getInstruccion() { return instruccion; }
-    public void setInstruccion(List<String> instruccion) { this.instruccion = instruccion; }
+    public Map<String, List<String>> getInstruccion() { return instruccion; }
+    public void setInstruccion(Map<String, List<String>> instruccion) { this.instruccion = instruccion; }
     public String getEquipament() { return equipament; }
     public void setEquipament(String equipament) { this.equipament = equipament; }
     public Long getMainMuscle() { return mainMuscle; }

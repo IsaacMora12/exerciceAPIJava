@@ -1,6 +1,7 @@
 package infrastructure.adapter.in.web.exercise;
 
 import domain.port.exercise.in.ViewMuscleUseCase;
+import infrastructure.adapter.in.web.MediaUrlResolver;
 import infrastructure.adapter.in.web.exercise.dto.MuscleResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -24,9 +25,12 @@ public class ViewMuscleController {
     private static final Logger log = LoggerFactory.getLogger(ViewMuscleController.class);
 
     private final ViewMuscleUseCase viewMuscleUseCase;
+    private final MediaUrlResolver mediaUrlResolver;
 
-    public ViewMuscleController(ViewMuscleUseCase viewMuscleUseCase) {
+    public ViewMuscleController(ViewMuscleUseCase viewMuscleUseCase,
+                                MediaUrlResolver mediaUrlResolver) {
         this.viewMuscleUseCase = viewMuscleUseCase;
+        this.mediaUrlResolver = mediaUrlResolver;
     }
 
     @Operation(
@@ -45,7 +49,7 @@ public class ViewMuscleController {
                         muscle.getId(),
                         muscle.getName(),
                         muscle.getDescription(),
-                        muscle.getImages(),
+                        mediaUrlResolver.toUrls(muscle.getImages()),
                         muscle.getIsActive(),
                         muscle.getCreatedAt(),
                         muscle.getUpdatedAt(),

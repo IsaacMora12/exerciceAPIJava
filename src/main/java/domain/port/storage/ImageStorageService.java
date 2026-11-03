@@ -19,4 +19,15 @@ public class ImageStorageService {
         imageFileValidator.validate(file);
         return delegate.upload(file, "images");
     }
+
+    /**
+     * Subida con clave determinista (J2): la MISMA validación que por API, pero el
+     * objeto queda exactamente en {@code key}. La usa el seeder con
+     * {@code images/<basename>}.
+     */
+    public String uploadAs(MultipartFile file, String key)
+    {
+        imageFileValidator.validate(file);
+        return delegate.uploadAt(file, key);
+    }
 }

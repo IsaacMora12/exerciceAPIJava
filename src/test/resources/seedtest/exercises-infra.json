@@ -1,0 +1,46 @@
+[
+  {
+    "name": "SeedTestInfraBadPre",
+    "description": {"en": "data-level failure that happens BEFORE the infra failure"},
+    "category": "Strength",
+    "instruccion": {"en": ["Step 1"]},
+    "equipament": "Barbell",
+    "mainMuscle": "SeedTestInfraMuscle",
+    "othersMuscle": [],
+    "images": ["https://example.com/bad,name.jpg"],
+    "videos": []
+  },
+  {
+    "name": "SeedTestInfraPre1",
+    "description": {"en": "seeds fine"},
+    "category": "Strength",
+    "instruccion": {"en": ["Step 1"]},
+    "equipament": "Barbell",
+    "mainMuscle": "SeedTestInfraMuscle",
+    "othersMuscle": [],
+    "images": ["https://example.com/0002-Hy9D21L.jpg"],
+    "videos": []
+  },
+  {
+    "name": "SeedTestInfraPre2",
+    "description": {"en": "its upload is the simulated infrastructure failure"},
+    "category": "Strength",
+    "instruccion": {"en": ["Step 1"]},
+    "equipament": "Barbell",
+    "mainMuscle": "SeedTestInfraMuscle",
+    "othersMuscle": [],
+    "images": ["https://example.com/0003-1ZFqTDN.jpg"],
+    "videos": []
+  },
+  {
+    "name": "SeedTestInfraPre3",
+    "description": {"en": "must never be reached"},
+    "category": "Strength",
+    "instruccion": {"en": ["Step 1"]},
+    "equipament": "Barbell",
+    "mainMuscle": "SeedTestInfraMuscle",
+    "othersMuscle": [],
+    "images": ["https://example.com/0006-qaZVsGk.jpg"],
+    "videos": []
+  }
+]

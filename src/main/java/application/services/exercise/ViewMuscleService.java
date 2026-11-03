@@ -1,10 +1,11 @@
 package application.services.exercise;
 
-import domain.model.exercice.Muscle;
+import domain.model.exercise.Muscle;
 import domain.port.exercise.MuscleRepository;
 import domain.port.exercise.in.ViewMuscleUseCase;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,6 +18,7 @@ public class ViewMuscleService implements ViewMuscleUseCase {
     @Override
     public Optional<Muscle> viewMuscle(long id)
     {return muscleRepository.findById(id);}
-
-
+    @Override
+    public List<Muscle> findAll()
+    {return muscleRepository.findAll();}
 }

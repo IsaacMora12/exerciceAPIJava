@@ -6,6 +6,7 @@ import infrastructure.adapter.in.web.jackson.StringListDeserializer;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.List;
+import java.util.Map;
 
 @Schema(description = "Payload required to update an exercise")
 public record UpdateExerciseRequest(
@@ -14,14 +15,14 @@ public record UpdateExerciseRequest(
 
         @Schema(description = "Exercise description", example = "[\"Standing curl with barbell\", \"Keep elbows close\"]")
         @JsonDeserialize(using = StringListDeserializer.class)
-        List<String> description,
+        Map<String, String> description,
 
         @Schema(description = "Exercise category", example = "Strength")
         String category,
 
         @Schema(description = "Step-by-step instructions", example = "[\"Stand upright\", \"Curl the barbell\"]")
         @JsonDeserialize(using = StringListDeserializer.class)
-        List<String> instruccion,
+       Map<String, List<String>> instruccion,
 
         @Schema(description = "Required equipment", example = "Barbell")
         String equipament,

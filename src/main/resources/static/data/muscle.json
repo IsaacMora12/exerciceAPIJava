@@ -1,0 +1,282 @@
+[
+  {
+    "name": "Abdominals",
+    "description": "Core muscle group primarily composed of the rectus abdominis, responsible for flexing the spine and stabilizing the pelvis.",
+    "images": [
+      "https://example.com/abdominals.jpg"
+    ]
+  },
+  {
+    "name": "Ankle Stabilizers",
+    "description": "Group of muscles and tendons (such as the peroneals and tibialis posterior) that maintain lateral and medial ankle stability.",
+    "images": [
+      "https://example.com/ankle_stabilizers.jpg"
+    ]
+  },
+  {
+    "name": "Ankles",
+    "description": "Joint and muscular region connecting the leg to the foot, enabling dorsiflexion, plantarflexion, and weight transfer.",
+    "images": [
+      "https://example.com/ankles.jpg"
+    ]
+  },
+  {
+    "name": "Back",
+    "description": "Comprehensive posterior muscle complex extending from the pelvis to the neck, responsible for pulling movements and spinal extension.",
+    "images": [
+      "https://example.com/back.jpg"
+    ]
+  },
+  {
+    "name": "Biceps",
+    "description": "Two-headed muscle on the front of the upper arm responsible for elbow flexion and forearm supination.",
+    "images": [
+      "https://example.com/biceps.jpg"
+    ]
+  },
+  {
+    "name": "Brachialis",
+    "description": "Muscle situated beneath the biceps brachii that acts as the primary and strongest flexor of the elbow joint.",
+    "images": [
+      "https://example.com/brachialis.jpg"
+    ]
+  },
+  {
+    "name": "Calves",
+    "description": "Posterior lower leg muscles (gastrocnemius and soleus) that perform plantarflexion to lift the heel when walking, running, or jumping.",
+    "images": [
+      "https://example.com/calves.jpg"
+    ]
+  },
+  {
+    "name": "Chest",
+    "description": "Pectoral muscle group (pectoralis major and minor) responsible for arm adduction, medial rotation, and pushing movements.",
+    "images": [
+      "https://example.com/chest.jpg"
+    ]
+  },
+  {
+    "name": "Core",
+    "description": "Central neuromuscular unit (abs, lower back, diaphragm, pelvic floor) that transfers force and stabilizes the trunk.",
+    "images": [
+      "https://example.com/core.jpg"
+    ]
+  },
+  {
+    "name": "Deltoids",
+    "description": "Three-headed shoulder muscle (anterior, lateral, posterior) responsible for lifting and rotating the arm in all planes.",
+    "images": [
+      "https://example.com/deltoids.jpg"
+    ]
+  },
+  {
+    "name": "Feet",
+    "description": "Intrinsic muscular and fascial structure of the foot that supports the plantar arch and absorbs ground impact.",
+    "images": [
+      "https://example.com/feet.jpg"
+    ]
+  },
+  {
+    "name": "Forearms",
+    "description": "Muscle group in the lower arm controlling wrist movement, finger flexion/extension, and forearm rotation.",
+    "images": [
+      "https://example.com/forearms.jpg"
+    ]
+  },
+  {
+    "name": "Glutes",
+    "description": "Muscles of the buttocks (gluteus maximus, medius, and minimus) essential for hip extension, abduction, and pelvis stability.",
+    "images": [
+      "https://example.com/glutes.jpg"
+    ]
+  },
+  {
+    "name": "Grip Muscles",
+    "description": "Forearm and hand intrinsic muscles responsible for hand strength, crushing grip, and holding objects.",
+    "images": [
+      "https://example.com/grip_muscles.jpg"
+    ]
+  },
+  {
+    "name": "Groin",
+    "description": "Junction area between the abdomen and thigh, primarily housing the hip adductor muscle group.",
+    "images": [
+      "https://example.com/groin.jpg"
+    ]
+  },
+  {
+    "name": "Hamstrings",
+    "description": "Posterior thigh muscles (biceps femoris, semitendinosus, semimembranosus) responsible for knee flexion and hip extension.",
+    "images": [
+      "https://example.com/hamstrings.jpg"
+    ]
+  },
+  {
+    "name": "Hands",
+    "description": "Intrinsic hand musculature providing fine motor control, dexterity, and pinching ability.",
+    "images": [
+      "https://example.com/hands.jpg"
+    ]
+  },
+  {
+    "name": "Hip Flexors",
+    "description": "Group of muscles (including the iliopsoas and rectus femoris) that lift the knee toward the torso.",
+    "images": [
+      "https://example.com/hip_flexors.jpg"
+    ]
+  },
+  {
+    "name": "Inner Thighs",
+    "description": "Adductor muscles on the inside of the thigh that pull the leg inward toward the body's midline.",
+    "images": [
+      "https://example.com/inner_thighs.jpg"
+    ]
+  },
+  {
+    "name": "Latissimus Dorsi",
+    "description": "Large flat muscle on the back responsible for arm extension, adduction, and internal rotation.",
+    "images": [
+      "https://example.com/latissimus_dorsi.jpg"
+    ]
+  },
+  {
+    "name": "Lats",
+    "description": "Common shorthand for latissimus dorsi; key muscle engaged in pulling movements like pull-ups and rows.",
+    "images": [
+      "https://example.com/lats.jpg"
+    ]
+  },
+  {
+    "name": "Lower Abs",
+    "description": "Inferior portion of the rectus abdominis active in leg-raising movements and posterior pelvic tilt.",
+    "images": [
+      "https://example.com/lower_abs.jpg"
+    ]
+  },
+  {
+    "name": "Lower Back",
+    "description": "Lumbar region muscles (such as the erector spinae) dedicated to extending the spine and maintaining upright posture.",
+    "images": [
+      "https://example.com/lower_back.jpg"
+    ]
+  },
+  {
+    "name": "Obliques",
+    "description": "Abdominal muscles located on the sides of the torso (internal and external) responsible for trunk rotation and lateral flexion.",
+    "images": [
+      "https://example.com/obliques.jpg"
+    ]
+  },
+  {
+    "name": "Quadriceps",
+    "description": "Four-headed muscle group on the front of the thigh primarily responsible for extending the knee joint.",
+    "images": [
+      "https://example.com/quadriceps.jpg"
+    ]
+  },
+  {
+    "name": "Rear Deltoids",
+    "description": "Posterior head of the shoulder muscle responsible for horizontal abduction and external rotation of the arm.",
+    "images": [
+      "https://example.com/rear_deltoids.jpg"
+    ]
+  },
+  {
+    "name": "Rhomboids",
+    "description": "Upper back muscles located between the shoulder blades that retract and stabilize the scapulae.",
+    "images": [
+      "https://example.com/rhomboids.jpg"
+    ]
+  },
+  {
+    "name": "Rotator Cuff",
+    "description": "Set of four muscles and tendons stabilizing the humeral head inside the shoulder socket during arm rotation.",
+    "images": [
+      "https://example.com/rotator_cuff.jpg"
+    ]
+  },
+  {
+    "name": "Shins",
+    "description": "Anterior lower leg muscles, primarily the tibialis anterior, responsible for dorsiflexing the foot.",
+    "images": [
+      "https://example.com/shins.jpg"
+    ]
+  },
+  {
+    "name": "Shoulders",
+    "description": "Complex muscular structure surrounding the glenohumeral joint enabling full multi-planar arm movement.",
+    "images": [
+      "https://example.com/shoulders.jpg"
+    ]
+  },
+  {
+    "name": "Soleus",
+    "description": "Deep lower leg muscle beneath the gastrocnemius that performs plantarflexion, especially when the knee is bent.",
+    "images": [
+      "https://example.com/soleus.jpg"
+    ]
+  },
+  {
+    "name": "Sternocleidomastoid",
+    "description": "Major neck muscle responsible for rotating, tilting, and flexing the head.",
+    "images": [
+      "https://example.com/sternocleidomastoid.jpg"
+    ]
+  },
+  {
+    "name": "Trapezius",
+    "description": "Large triangular back muscle that controls scapular elevation, depression, retraction, and neck movement.",
+    "images": [
+      "https://example.com/trapezius.jpg"
+    ]
+  },
+  {
+    "name": "Traps",
+    "description": "Common shorthand for the trapezius muscle, heavily involved in shrugging and upper back support.",
+    "images": [
+      "https://example.com/traps.jpg"
+    ]
+  },
+  {
+    "name": "Triceps",
+    "description": "Three-headed muscle on the back of the upper arm responsible for extending the elbow joint.",
+    "images": [
+      "https://example.com/triceps.jpg"
+    ]
+  },
+  {
+    "name": "Upper Back",
+    "description": "Region consisting of the trapezius, rhomboids, and rear deltoids that supports upper body posture and pulling mechanics.",
+    "images": [
+      "https://example.com/upper_back.jpg"
+    ]
+  },
+  {
+    "name": "Upper Chest",
+    "description": "Clavicular head of the pectoralis major, activated heavily in inclined pushing movements.",
+    "images": [
+      "https://example.com/upper_chest.jpg"
+    ]
+  },
+  {
+    "name": "Wrist Extensors",
+    "description": "Posterior forearm muscles that bend the wrist backward (dorsiflexion).",
+    "images": [
+      "https://example.com/wrist_extensors.jpg"
+    ]
+  },
+  {
+    "name": "Wrist Flexors",
+    "description": "Anterior forearm muscles responsible for bending the wrist forward toward the inner arm.",
+    "images": [
+      "https://example.com/wrist_flexors.jpg"
+    ]
+  },
+  {
+    "name": "Wrists",
+    "description": "Articular and tendon-dense zone allowing multidirectional hand positioning and force transmission.",
+    "images": [
+      "https://example.com/wrists.jpg"
+    ]
+  }
+]

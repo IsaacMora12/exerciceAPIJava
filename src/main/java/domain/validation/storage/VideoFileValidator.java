@@ -15,7 +15,7 @@ public class VideoFileValidator {
             "video/webm",
             "video/quicktime"
     );
-    private static final long MAX_SIZE = 10 * 1024 * 1024; // 50MB
+    private static final long MAX_SIZE = 10 * 1024 * 1024; // 10MB
 
     public void validate(MultipartFile file) {
         if (!ALLOWED_TYPES.contains(file.getContentType())) {
@@ -24,7 +24,7 @@ public class VideoFileValidator {
         }
         if (file.getSize() > MAX_SIZE) {
             throw new IllegalArgumentException(
-                    "Video too large. Maximum size: 50MB");
+                    "Video too large. Maximum size: 10MB");
         }
     }
 }

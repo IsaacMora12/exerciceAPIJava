@@ -1,7 +1,7 @@
 package com.example.exerciceapi.application.services.exercise;
 
-import domain.model.exercice.Exercise;
-import domain.model.exercice.Muscle;
+import domain.model.exercise.Exercise;
+import domain.model.exercise.Muscle;
 import domain.port.exercise.ExerciseRepository;
 import domain.port.exercise.MuscleRepository;
 import application.services.exercise.DeleteMuscleService;
@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -52,7 +53,7 @@ class DeleteMuscleServiceIntegrationTest {
     @Test
     void shouldThrowExceptionWhenMuscleIsUsedByExercise() {
         exerciseRepository.save(
-                Exercise.create("Exercise Using Muscle", List.of("desc"), "Cat",
+                Exercise.create("Exercise Using Muscle", Map.of("en", "desc"), "Cat",
                         null, null, existingMuscle.getId(), null, null, null, 1L));
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
@@ -64,7 +65,7 @@ class DeleteMuscleServiceIntegrationTest {
     @Test
     void shouldThrowExceptionWhenMuscleIsUsedAsSecondaryMuscle() {
         exerciseRepository.save(
-                Exercise.create("Exercise With Secondary", List.of("desc"), "Cat",
+                Exercise.create("Exercise With Secondary", Map.of("en", "desc"), "Cat",
                         null, null, 99L, List.of(existingMuscle.getId()), null, null, 1L));
 
         assertThrows(IllegalArgumentException.class, () ->

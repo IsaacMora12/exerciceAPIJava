@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Schema(description = "Exercise response payload")
 public record ExerciseResponse(
@@ -14,13 +15,13 @@ public record ExerciseResponse(
         String name,
 
         @Schema(description = "Exercise description")
-        List<String> description,
+        Map<String, String> description,
 
         @Schema(description = "Exercise category", example = "Strength")
         String category,
 
         @Schema(description = "Step-by-step instructions")
-        List<String> instruccion,
+        Map<String, List<String>> instruccion,
 
         @Schema(description = "Required equipment", example = "Barbell")
         String equipament,

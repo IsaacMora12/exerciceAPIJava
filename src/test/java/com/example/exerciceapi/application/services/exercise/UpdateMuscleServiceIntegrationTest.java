@@ -1,6 +1,6 @@
 package com.example.exerciceapi.application.services.exercise;
 
-import domain.model.exercice.Muscle;
+import domain.model.exercise.Muscle;
 import domain.port.exercise.MuscleRepository;
 import application.services.exercise.UpdateMuscleService;
 import org.junit.jupiter.api.BeforeEach;

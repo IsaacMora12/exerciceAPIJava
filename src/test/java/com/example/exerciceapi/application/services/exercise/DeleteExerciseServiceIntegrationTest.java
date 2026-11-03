@@ -1,6 +1,6 @@
 package com.example.exerciceapi.application.services.exercise;
 
-import domain.model.exercice.Exercise;
+import domain.model.exercise.Exercise;
 import domain.port.exercise.ExerciseRepository;
 import application.services.exercise.DeleteExerciseService;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,7 +28,7 @@ class DeleteExerciseServiceIntegrationTest {
     @BeforeEach
     void setUp() {
         existingExercise = exerciseRepository.save(
-                Exercise.create("To Delete", List.of("desc"), "Cat", null, null, 1L, null, null, null, 1L));
+                Exercise.create("To Delete", Map.of("en", "desc"), "Cat", null, null, 1L, null, null, null, 1L));
     }
 
     @Test
@@ -47,7 +47,7 @@ class DeleteExerciseServiceIntegrationTest {
     @Test
     void shouldDeleteOnlySpecifiedExercise() {
         Exercise other = exerciseRepository.save(
-                Exercise.create("Other", List.of("desc"), "Cat", null, null, 1L, null, null, null, 1L));
+                Exercise.create("Other", Map.of("en", "desc"), "Cat", null, null, 1L, null, null, null, 1L));
 
         deleteExerciseService.deleteExercise(existingExercise.getId());
 

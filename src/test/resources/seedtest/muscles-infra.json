@@ -1,0 +1,12 @@
+[
+  {
+    "name": "SeedTestInfraMuscle1",
+    "description": "first upload blows up with an infrastructure error",
+    "images": ["https://example.com/0001-2gPfomN.jpg"]
+  },
+  {
+    "name": "SeedTestInfraMuscle2",
+    "description": "must never be reached",
+    "images": ["https://example.com/0002-Hy9D21L.jpg"]
+  }
+]

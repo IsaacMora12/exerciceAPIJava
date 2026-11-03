@@ -1,6 +1,7 @@
 package infrastructure.adapter.in.web.exercise;
 
 import domain.port.exercise.in.ViewExerciseUseCase;
+import infrastructure.adapter.in.web.MediaUrlResolver;
 import infrastructure.adapter.in.web.exercise.dto.ExerciseResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -24,9 +25,12 @@ public class ViewExerciseController {
     private static final Logger log = LoggerFactory.getLogger(ViewExerciseController.class);
 
     private final ViewExerciseUseCase viewExerciseUseCase;
+    private final MediaUrlResolver mediaUrlResolver;
 
-    public ViewExerciseController(ViewExerciseUseCase viewExerciseUseCase) {
+    public ViewExerciseController(ViewExerciseUseCase viewExerciseUseCase,
+                                  MediaUrlResolver mediaUrlResolver) {
         this.viewExerciseUseCase = viewExerciseUseCase;
+        this.mediaUrlResolver = mediaUrlResolver;
     }
 
     @Operation(
@@ -50,8 +54,8 @@ public class ViewExerciseController {
                         exercise.getEquipament(),
                         exercise.getMainMuscle(),
                         exercise.getOthersMuscle(),
-                        exercise.getImages(),
-                        exercise.getVideos(),
+                        mediaUrlResolver.toUrls(exercise.getImages()),
+                        mediaUrlResolver.toUrls(exercise.getVideos()),
                         exercise.getIsActive(),
                         exercise.getCreatedAt(),
                         exercise.getUpdatedAt(),

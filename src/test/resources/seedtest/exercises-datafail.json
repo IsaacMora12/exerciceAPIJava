@@ -1,0 +1,46 @@
+[
+  {
+    "name": "SeedTestGoodEx1",
+    "description": {"en": "ok"},
+    "category": "Strength",
+    "instruccion": {"en": ["Step 1"]},
+    "equipament": "Barbell",
+    "mainMuscle": "SeedTestGoodMuscle1",
+    "othersMuscle": [],
+    "images": [],
+    "videos": []
+  },
+  {
+    "name": "SeedTestUnsafeEx",
+    "description": {"en": "asset basename contains a space — corrupts ListStringConverter"},
+    "category": "Strength",
+    "instruccion": {"en": ["Step 1"]},
+    "equipament": "Barbell",
+    "mainMuscle": "SeedTestGoodMuscle1",
+    "othersMuscle": [],
+    "images": ["https://example.com/bad name.jpg"],
+    "videos": []
+  },
+  {
+    "name": "SeedTestOrphanEx",
+    "description": {"en": "mainMuscle cannot be resolved"},
+    "category": "Strength",
+    "instruccion": {"en": ["Step 1"]},
+    "equipament": "Barbell",
+    "mainMuscle": "SeedTestNoSuchMuscle",
+    "othersMuscle": [],
+    "images": [],
+    "videos": []
+  },
+  {
+    "name": "SeedTestGoodEx2",
+    "description": {"en": "ok"},
+    "category": "Strength",
+    "instruccion": {"en": ["Step 1"]},
+    "equipament": "Barbell",
+    "mainMuscle": "SeedTestGoodMuscle1",
+    "othersMuscle": ["SeedTestGoodMuscle2"],
+    "images": [],
+    "videos": []
+  }
+]

@@ -18,4 +18,14 @@ public class VideoStorageService {
         videoFileValidator.validate(file);
         return delegate.upload(file, "videos");
     }
+
+    /**
+     * Subida con clave determinista (J2): la MISMA validación que por API, pero el
+     * objeto queda exactamente en {@code key}. La usa el seeder con
+     * {@code videos/<basename>}.
+     */
+    public String uploadAs(MultipartFile file, String key) {
+        videoFileValidator.validate(file);
+        return delegate.uploadAt(file, key);
+    }
 }

@@ -1,8 +1,9 @@
 package infrastructure.adapter.in.web.exercise;
 
-import domain.model.exercice.Muscle;
+import domain.model.exercise.Muscle;
 import domain.port.exercise.in.CreateMuscleUseCase;
 import domain.port.storage.ImageStorageService;
+import infrastructure.adapter.in.web.MediaUrlResolver;
 import infrastructure.adapter.in.web.exercise.dto.CreateMuscleRequest;
 import infrastructure.adapter.in.web.exercise.dto.MuscleResponse;
 import infrastructure.adapter.in.web.teams.dto.ErrorResponse;
@@ -40,11 +41,14 @@ public class CreateMuscleController {
 
     private final CreateMuscleUseCase createMuscleUseCase;
     private final ImageStorageService imageStorageService;
+    private final MediaUrlResolver mediaUrlResolver;
 
     public CreateMuscleController(CreateMuscleUseCase createMuscleUseCase,
-                                   ImageStorageService imageStorageService) {
+                                   ImageStorageService imageStorageService,
+                                   MediaUrlResolver mediaUrlResolver) {
         this.createMuscleUseCase = createMuscleUseCase;
         this.imageStorageService = imageStorageService;
+        this.mediaUrlResolver = mediaUrlResolver;
     }
 
     @Operation(
@@ -108,7 +112,7 @@ public class CreateMuscleController {
                     createdMuscle.getId(),
                     createdMuscle.getName(),
                     createdMuscle.getDescription(),
-                    createdMuscle.getImages(),
+                    mediaUrlResolver.toUrls(createdMuscle.getImages()),
                     createdMuscle.getIsActive(),
                     createdMuscle.getCreatedAt(),
                     createdMuscle.getUpdatedAt(),

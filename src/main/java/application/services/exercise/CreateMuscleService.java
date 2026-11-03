@@ -1,6 +1,6 @@
 package application.services.exercise;
 
-import domain.model.exercice.Muscle;
+import domain.model.exercise.Muscle;
 import domain.port.exercise.MuscleRepository;
 import domain.port.exercise.in.CreateMuscleUseCase;
 import org.springframework.stereotype.Service;

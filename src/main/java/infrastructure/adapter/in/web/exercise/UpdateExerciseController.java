@@ -1,7 +1,8 @@
 package infrastructure.adapter.in.web.exercise;
 
-import domain.model.exercice.Exercise;
+import domain.model.exercise.Exercise;
 import domain.port.exercise.in.UpdateExerciseUseCase;
+import infrastructure.adapter.in.web.MediaUrlResolver;
 import infrastructure.adapter.in.web.exercise.dto.ExerciseResponse;
 import infrastructure.adapter.in.web.exercise.dto.UpdateExerciseRequest;
 import infrastructure.adapter.in.web.teams.dto.ErrorResponse;
@@ -28,9 +29,12 @@ public class UpdateExerciseController {
     private static final Logger log = LoggerFactory.getLogger(UpdateExerciseController.class);
 
     private final UpdateExerciseUseCase updateExerciseUseCase;
+    private final MediaUrlResolver mediaUrlResolver;
 
-    public UpdateExerciseController(UpdateExerciseUseCase updateExerciseUseCase) {
+    public UpdateExerciseController(UpdateExerciseUseCase updateExerciseUseCase,
+                                    MediaUrlResolver mediaUrlResolver) {
         this.updateExerciseUseCase = updateExerciseUseCase;
+        this.mediaUrlResolver = mediaUrlResolver;
     }
 
     @Operation(
@@ -67,8 +71,8 @@ public class UpdateExerciseController {
                     updatedExercise.getEquipament(),
                     updatedExercise.getMainMuscle(),
                     updatedExercise.getOthersMuscle(),
-                    updatedExercise.getImages(),
-                    updatedExercise.getVideos(),
+                    mediaUrlResolver.toUrls(updatedExercise.getImages()),
+                    mediaUrlResolver.toUrls(updatedExercise.getVideos()),
                     updatedExercise.getIsActive(),
                     updatedExercise.getCreatedAt(),
                     updatedExercise.getUpdatedAt(),

@@ -1,6 +1,6 @@
 package com.example.exerciceapi.application.services.exercise;
 
-import domain.model.exercice.Exercise;
+import domain.model.exercise.Exercise;
 import domain.port.exercise.ExerciseRepository;
 import application.services.exercise.UpdateExerciseService;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,21 +29,21 @@ class UpdateExerciseServiceIntegrationTest {
     @BeforeEach
     void setUp() {
         existingExercise = exerciseRepository.save(
-                Exercise.create("Original Name", List.of("Original desc"), "Strength",
-                        List.of("Step 1"), "Barbell", 1L, List.of(2L),
+                Exercise.create("Original Name", Map.of("en", "Original desc"), "Strength",
+                        Map.of("en", List.of("Step 1")), "Barbell", 1L, List.of(2L),
                         List.of("img.jpg"), List.of("vid.mp4"), 1L));
     }
 
     @Test
     void shouldUpdateExerciseSuccessfully() {
         Exercise updated = updateExerciseService.updateExercise(
-                existingExercise.getId(), "Updated Name", List.of("Updated desc"), "Cardio",
-                List.of("New step"), "Dumbbell", 3L,
+                existingExercise.getId(), "Updated Name", Map.of("en", "Updated desc"), "Cardio",
+                Map.of("en", List.of("New step")), "Dumbbell", 3L,
                 List.of(4L, 5L), List.of("new.jpg"), List.of("new.mp4"),
                 false, 2L);
 
         assertEquals("Updated Name", updated.getName());
-        assertEquals(List.of("Updated desc"), updated.getDescription());
+        assertEquals(Map.of("en", "Updated desc"), updated.getDescription());
         assertEquals("Cardio", updated.getCategory());
         assertEquals("Dumbbell", updated.getEquipament());
         assertEquals(3L, updated.getMainMuscle());
@@ -56,7 +57,7 @@ class UpdateExerciseServiceIntegrationTest {
     @Test
     void shouldPersistUpdatedExercise() {
         updateExerciseService.updateExercise(
-                existingExercise.getId(), "Updated", List.of("desc"), "Cat",
+                existingExercise.getId(), "Updated", Map.of("en", "desc"), "Cat",
                 null, null, 1L, null, null, null, true, 1L);
 
         Exercise found = exerciseRepository.findById(existingExercise.getId()).orElseThrow();
@@ -67,26 +68,26 @@ class UpdateExerciseServiceIntegrationTest {
     void shouldThrowExceptionWhenExerciseNotFound() {
         assertThrows(IllegalArgumentException.class, () ->
                 updateExerciseService.updateExercise(
-                        99999L, "Name", List.of("desc"), "Cat",
+                        99999L, "Name", Map.of("en", "desc"), "Cat",
                         null, null, 1L, null, null, null, true, 1L));
     }
 
     @Test
     void shouldThrowExceptionWhenNameIsDuplicated() {
         Exercise other = exerciseRepository.save(
-                Exercise.create("Other Exercise", List.of("desc"), "Cat",
+                Exercise.create("Other Exercise", Map.of("en", "desc"), "Cat",
                         null, null, 2L, null, null, null, 1L));
 
         assertThrows(IllegalArgumentException.class, () ->
                 updateExerciseService.updateExercise(
-                        existingExercise.getId(), "Other Exercise", List.of("desc"), "Cat",
+                        existingExercise.getId(), "Other Exercise", Map.of("en", "desc"), "Cat",
                         null, null, 1L, null, null, null, true, 1L));
     }
 
     @Test
     void shouldAllowUpdatingNameToItself() {
         Exercise updated = updateExerciseService.updateExercise(
-                existingExercise.getId(), "Original Name", List.of("desc"), "Cat",
+                existingExercise.getId(), "Original Name", Map.of("en", "desc"), "Cat",
                 null, null, 1L, null, null, null, true, 1L);
 
         assertEquals("Original Name", updated.getName());

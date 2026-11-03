@@ -18,6 +18,14 @@ public class TestStorageConfig {
                 return "test://" + directory + "/" + file.getOriginalFilename();
             }
 
+            /**
+             * Doble de {@code uploadAt} (clave determinista J2).
+             */
+            @Override
+            public String uploadAt(MultipartFile file, String key) {
+                return "test://" + key;
+            }
+
             @Override
             public void delete(String fileKey) {
                 // no-op for tests

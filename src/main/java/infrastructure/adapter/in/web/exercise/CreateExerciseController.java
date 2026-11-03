@@ -1,9 +1,10 @@
 package infrastructure.adapter.in.web.exercise;
 
-import domain.model.exercice.Exercise;
+import domain.model.exercise.Exercise;
 import domain.port.exercise.in.CreateExerciseUseCase;
 import domain.port.storage.ImageStorageService;
 import domain.port.storage.VideoStorageService;
+import infrastructure.adapter.in.web.MediaUrlResolver;
 import infrastructure.adapter.in.web.exercise.dto.CreateExerciseRequest;
 import infrastructure.adapter.in.web.exercise.dto.ExerciseResponse;
 import infrastructure.adapter.in.web.teams.dto.ErrorResponse;
@@ -39,13 +40,16 @@ public class CreateExerciseController {
     private final CreateExerciseUseCase createExerciseUseCase;
     private final ImageStorageService imageStorageService;
     private final VideoStorageService videoStorageService;
+    private final MediaUrlResolver mediaUrlResolver;
 
     public CreateExerciseController(CreateExerciseUseCase createExerciseUseCase,
                                      ImageStorageService imageStorageService,
-                                     VideoStorageService videoStorageService) {
+                                     VideoStorageService videoStorageService,
+                                     MediaUrlResolver mediaUrlResolver) {
         this.createExerciseUseCase = createExerciseUseCase;
         this.imageStorageService = imageStorageService;
         this.videoStorageService = videoStorageService;
+        this.mediaUrlResolver = mediaUrlResolver;
     }
 
     @Operation(
@@ -133,8 +137,8 @@ public class CreateExerciseController {
                     createdExercise.getEquipament(),
                     createdExercise.getMainMuscle(),
                     createdExercise.getOthersMuscle(),
-                    createdExercise.getImages(),
-                    createdExercise.getVideos(),
+                    mediaUrlResolver.toUrls(createdExercise.getImages()),
+                    mediaUrlResolver.toUrls(createdExercise.getVideos()),
                     createdExercise.getIsActive(),
                     createdExercise.getCreatedAt(),
                     createdExercise.getUpdatedAt(),

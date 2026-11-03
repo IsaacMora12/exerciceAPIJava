@@ -1,11 +1,12 @@
 package application.services.exercise;
 
-import domain.model.exercice.Exercise;
+import domain.model.exercise.Exercise;
 import domain.port.exercise.ExerciseRepository;
 import domain.port.exercise.in.CreateExerciseUseCase;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CreateExerciseService implements CreateExerciseUseCase {
@@ -17,8 +18,8 @@ public class CreateExerciseService implements CreateExerciseUseCase {
     }
 
     @Override
-    public Exercise createExercise(String name, List<String> description, String category,
-                                   List<String> instruccion, String equipament,
+    public Exercise createExercise(String name, Map<String, String> description, String category,
+                                   Map<String, List<String>> instruccion, String equipament,
                                    Long mainMuscle, List<Long> othersMuscle,
                                    List<String> images, List<String> videos, Long updatedBy) {
         if (exerciseRepository.findByName(name).isPresent()) {

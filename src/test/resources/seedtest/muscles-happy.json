@@ -1,0 +1,12 @@
+[
+  {
+    "name": "SeedTestBenchMuscle",
+    "description": "Fixture muscle with a real asset on disk",
+    "images": ["https://example.com/0001-2gPfomN.jpg"]
+  },
+  {
+    "name": "SeedTestSquatMuscle",
+    "description": "Fixture muscle whose asset is deliberately missing",
+    "images": ["https://example.com/missing-muscle-asset.jpg"]
+  }
+]

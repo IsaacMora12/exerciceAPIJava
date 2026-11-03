@@ -1,0 +1,17 @@
+[
+  {
+    "name": "SeedTestGoodMuscle1",
+    "description": "ok",
+    "images": []
+  },
+  {
+    "name": "SeedTestUnsafeMuscle",
+    "description": "asset basename contains a comma — corrupts ListStringConverter",
+    "images": ["https://example.com/bad,name.jpg"]
+  },
+  {
+    "name": "SeedTestGoodMuscle2",
+    "description": "ok",
+    "images": []
+  }
+]

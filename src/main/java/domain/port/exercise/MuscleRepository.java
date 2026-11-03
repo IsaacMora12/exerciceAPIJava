@@ -1,6 +1,6 @@
 package domain.port.exercise;
 
-import domain.model.exercice.Muscle;
+import domain.model.exercise.Muscle;
 
 import java.util.List;
 import java.util.Optional;

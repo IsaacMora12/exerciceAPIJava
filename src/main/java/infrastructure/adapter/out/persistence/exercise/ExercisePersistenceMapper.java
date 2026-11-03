@@ -1,6 +1,6 @@
 package infrastructure.adapter.out.persistence.exercise;
 
-import domain.model.exercice.Exercise;
+import domain.model.exercise.Exercise;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
